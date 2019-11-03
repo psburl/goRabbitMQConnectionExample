@@ -11,16 +11,13 @@ import (
 )
 
 func init() {
-
 	if err := godotenv.Load(); err != nil {
 		log.Print("No .env file found")
 	}
 }
 
 func main() {
-
 	container := buildContainer()
-
 	container.Invoke(func(manager msg.ConsumerManager) {
 		manager.Consume("After.debug")
 	})

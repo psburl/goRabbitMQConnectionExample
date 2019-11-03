@@ -5,11 +5,13 @@ import (
 	"github.com/streadway/amqp"
 )
 
+// RabbitConsumerManager (*) implements ConsumerManager using rabbitMQ as queue manager
 type RabbitConsumerManager struct {
 	consumerAction ConsumerAction
 	environment    env.Manager
 }
 
+// NewRabbitConsumerManager constructs a new *RabbitConsumerManager
 func NewRabbitConsumerManager(
 	environment env.Manager,
 	consumerAction ConsumerAction) *RabbitConsumerManager {
@@ -18,6 +20,7 @@ func NewRabbitConsumerManager(
 		consumerAction: consumerAction}
 }
 
+// Consume consumes the rabbitMQ queue specified on param
 func (consumer *RabbitConsumerManager) Consume(queue string) {
 
 	amqpConn, err := amqp.Dial(consumer.environment.GetAmqpURL())
